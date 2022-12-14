@@ -7,4 +7,5 @@ SELECT rp.Title, rp.PublishedAt,
 FROM ResearchPapers rp
 
 --2
-
+SELECT s.FirstName, s.LastName, s.Sex, c.Name, c.PPPCapitaInCents FROM Scientists s
+JOIN Countries c ON c.CountryId = s.CountryId
