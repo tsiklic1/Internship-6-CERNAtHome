@@ -65,6 +65,12 @@ CREATE TABLE AcceleratorProjects(
 	ProjectId INT REFERENCES Projects(ProjectId) NOT NULL
 );
 
+ALTER TABLE AcceleratorProjects
+ALTER COLUMN AcceleratorId SET NOT NULL
+
+ALTER TABLE AcceleratorProjects
+ADD CONSTRAINT UniqueAcceleratorProjectPair UNIQUE(AcceleratorId, ProjectId);
+
 --ScientistsPapers
 CREATE TABLE ScientistsPapers(
 	Id SERIAL PRIMARY KEY,
