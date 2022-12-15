@@ -24,6 +24,24 @@ SELECT * FROM Projects p
 WHERE (SELECT COUNT(*) FROM ResearchPapers rp WHERE p.ProjectId = rp.ProjectId AND 
 	  DATE_PART('year', rp.PublishedAt) >= 2015 AND DATE_PART('year', rp.PublishedAt) <= 2017) > 0
 
+--5 u istoj tablici po zemlji broj radova i najpopularniji rad znanstvenika iste zemlje,
+--pri čemu je najpopularniji rad onaj koji ima najviše citata
+SELECT c.Name, COUNT(sp.ResearchPaperId) FROM Countries c
+LEFT JOIN Scientists s ON c.CountryId = s.CountryId
+LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
+LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY c.Name
+
+--6 
+SELECT DISTINCT ON (c.CountryId) c.CountryId, c.Name, rp.Title, rp.PublishedAt FROM ResearchPapers rp
+JOIN ScientistsPapers sp ON rp.ResearchPaperId = sp.ResearchPaperId
+JOIN Scientists s ON s.ScientistId = sp.ScientistId
+RIGHT JOIN Countries c ON c.CountryId = s.CountryId
+ORDER BY c.CountryId, rp.PublishedAt
+
+
+
+
 
 
 
