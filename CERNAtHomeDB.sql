@@ -85,27 +85,25 @@ SELECT COUNT(*) FROM ResearchPapers
 
 --insert into Hotels
 insert into Hotels (HotelId, Capacity, City) values (1, 200, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (2, 417, 'Geneva');
+insert into Hotels (HotelId, Capacity, City) values (2, 417, 'Paris');
 insert into Hotels (HotelId, Capacity, City) values (3, 330, 'Geneva');
 insert into Hotels (HotelId, Capacity, City) values (4, 374, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (5, 108, 'Geneva');
+insert into Hotels (HotelId, Capacity, City) values (5, 108, 'Munchen');
 insert into Hotels (HotelId, Capacity, City) values (6, 116, 'Geneva');
 insert into Hotels (HotelId, Capacity, City) values (7, 72, 'Geneva');
 insert into Hotels (HotelId, Capacity, City) values (8, 310, 'Geneva');
 insert into Hotels (HotelId, Capacity, City) values (9, 42, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (10, 164, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (11, 174, 'Geneva');
+insert into Hotels (HotelId, Capacity, City) values (10, 164, 'Berlin');
+insert into Hotels (HotelId, Capacity, City) values (11, 174, 'Berlin');
 insert into Hotels (HotelId, Capacity, City) values (12, 120, 'Geneva');
 insert into Hotels (HotelId, Capacity, City) values (13, 208, 'Vienna');
 insert into Hotels (HotelId, Capacity, City) values (14, 297, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (15, 259, 'Geneva');
+insert into Hotels (HotelId, Capacity, City) values (15, 259, 'Zagreb');
 insert into Hotels (HotelId, Capacity, City) values (16, 388, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (17, 86, 'Geneva');
-insert into Hotels (HotelId, Capacity, City) values (18, 172, 'Geneva');
+insert into Hotels (HotelId, Capacity, City) values (17, 86, 'Munchen');
+insert into Hotels (HotelId, Capacity, City) values (18, 172, 'Munchen');
 insert into Hotels (HotelId, Capacity, City) values (19, 62, 'Geneva');
 insert into Hotels (HotelId, Capacity, City) values (20, 270, 'Geneva');
-
-
 
 --insert into Countries
 insert into Countries (CountryId, Name, Population, PPPCapitaInCents) values (1, 'Cyprus', 65440975, 50458738);

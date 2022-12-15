@@ -39,7 +39,13 @@ JOIN Scientists s ON s.ScientistId = sp.ScientistId
 RIGHT JOIN Countries c ON c.CountryId = s.CountryId
 ORDER BY c.CountryId, rp.PublishedAt
 
+--7
+SELECT h.City, COUNT(s.FirstName) FROM Hotels h
+JOIN Scientists s ON s.HotelId = h.HotelId
+GROUP BY h.City
+ORDER BY COUNT(s.FirstName) DESC
 
+--8 
 
 
 
