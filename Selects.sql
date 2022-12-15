@@ -46,8 +46,11 @@ GROUP BY h.City
 ORDER BY COUNT(s.FirstName) DESC
 
 --8 
-
-
+SELECT a.Name, ROUND(AVG(rp.NumberOfCitations), 2) FROM Accelerators a
+JOIN AcceleratorProjects ap ON ap.AcceleratorId = a.AcceleratorId
+JOIN Projects p ON p.ProjectId = ap.ProjectId
+JOIN ResearchPapers rp ON rp.ProjectId = p.ProjectId
+GROUP BY a.Name
 
 
 
