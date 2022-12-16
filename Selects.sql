@@ -46,12 +46,17 @@ GROUP BY h.City
 ORDER BY COUNT(s.FirstName) DESC
 
 --8 
-SELECT a.Name, ROUND(AVG(rp.NumberOfCitations), 2) FROM Accelerators a
+SELECT a.Name, ROUND(AVG(rp.NumberOfCitations), 2) AS AverageCitations FROM Accelerators a
 JOIN AcceleratorProjects ap ON ap.AcceleratorId = a.AcceleratorId
 JOIN Projects p ON p.ProjectId = ap.ProjectId
 JOIN ResearchPapers rp ON rp.ProjectId = p.ProjectId
 GROUP BY a.Name
 
+--9 ovo radi samo moran dodat u seed da zapravo ispunjava uvjete (i moran dodat znanstevnike materijala)
+SELECT s.Profession, DATE_PART('decade', s.DateOfBirth) AS DecadeOfBirth, s.Sex, COUNT(*) AS NumberOfScientists FROM Scientists s
+GROUP BY s.Profession, DATE_PART('decade', s.DateOfBirth), s.Sex
+HAVING COUNT(*) > 20
+ORDER BY  DATE_PART('decade', s.DateOfBirth)
 
 
 
