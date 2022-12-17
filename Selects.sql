@@ -88,10 +88,52 @@ HAVING COUNT(*) > 20
 ORDER BY  DATE_PART('decade', s.DateOfBirth)
 
 --bonus 1
-SELECT rp.Title, COUNT(*) FROM Scientists s
+
+--ovo izbroji znanstvenike po svakom radu
+--ovo mi da samo imena i prezimena znanstvenika (40 rows)
+/*SELECT s.FirstName, s.Lastname, rp.ResearchPaperId FROM Scientists s
 JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
 JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
-GROUP BY rp.Title
+GROUP BY s.ScientistId, rp.ResearchPaperId
+ORDER BY s.Firstname, s.LastName*/
 
-SELECT DISTINCT(sp.ResearchPaperId) FROM ScientistsPapers sp
+--ovo mi da broj znanstvenika po radu (189 rows)
+/*SELECT rp.Title, COUNT(*) FROM Scientists s
+JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
+JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY rp.ResearchPaperId*/
+
+--koliko eura po radu se dobije
+/*SELECT rp.ResearchPaperId, SQRT(rp.NumberOfCitations)/COUNT(*) FROM Scientists s
+JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
+JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY rp.ResearchPaperId*/
+
+--bonus 1 rješenje
+SELECT t1.FirstName, t1.LastName, ROUND(CAST(SUM(t2.MoneyPerPaper) AS Numeric), 2) AS TotalMoney FROM
+(
+SELECT s.FirstName, s.Lastname, rp.ResearchPaperId FROM Scientists s
+JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
+JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY s.ScientistId, rp.ResearchPaperId
+ORDER BY s.Firstname, s.LastName
+) AS t1
+JOIN
+(
+SELECT rp.ResearchPaperId, SQRT(rp.NumberOfCitations)/COUNT(*) AS MoneyPerPaper FROM Scientists s
+JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
+JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY rp.ResearchPaperId
+) AS t2
+ON t1.ResearchPaperId = t2.ResearchPaperId
+GROUP BY t1.FirstName, t1.LastName
+ORDER BY TotalMoney DESC
+LIMIT 10
+
+
+
+
+
+
+
 
