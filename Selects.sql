@@ -26,11 +26,40 @@ WHERE (SELECT COUNT(*) FROM ResearchPapers rp WHERE p.ProjectId = rp.ProjectId A
 
 --5 u istoj tablici po zemlji broj radova i najpopularniji rad znanstvenika iste zemlje,
 --pri čemu je najpopularniji rad onaj koji ima najviše citata
-SELECT c.Name, COUNT(sp.ResearchPaperId) FROM Countries c
+--ovo mi da najpopularniji rad po državi
+/*SELECT	DISTINCT ON(c.Name) c.Name, rp.Title FROM Countries c
 LEFT JOIN Scientists s ON c.CountryId = s.CountryId
 LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
 LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
-GROUP BY c.Name
+ORDER BY c.Name, rp.NumberOfCitations
+
+--ovo mi da broj radova po državi
+SELECT c.Name, COUNT(sp.ResearchPaperId)
+FROM Countries c
+LEFT JOIN Scientists s ON c.CountryId = s.CountryId
+LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
+LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY c.Name*/
+
+--ode je samo spojeno to dvoje 
+SELECT t1.Name, t1.Title AS MostPopularResearchPaper, t2.CountOfResearchPapers FROM
+(SELECT	DISTINCT ON(c.Name) c.Name, rp.Title FROM Countries c
+LEFT JOIN Scientists s ON c.CountryId = s.CountryId
+LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
+LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+ORDER BY c.Name, rp.NumberOfCitations) t1
+JOIN
+(SELECT c.Name, COUNT(sp.ResearchPaperId) AS CountOfResearchPapers
+FROM Countries c
+LEFT JOIN Scientists s ON c.CountryId = s.CountryId
+LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
+LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY c.Name) t2
+ON t1.Name = t2.Name
+
+
+
+--5 
 
 --6 
 SELECT DISTINCT ON (c.CountryId) c.CountryId, c.Name, rp.Title, rp.PublishedAt FROM ResearchPapers rp
@@ -58,6 +87,11 @@ GROUP BY s.Profession, DATE_PART('decade', s.DateOfBirth), s.Sex
 HAVING COUNT(*) > 20
 ORDER BY  DATE_PART('decade', s.DateOfBirth)
 
+--bonus 1
+SELECT rp.Title, COUNT(*) FROM Scientists s
+JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
+JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
+GROUP BY rp.Title
 
-
+SELECT DISTINCT(sp.ResearchPaperId) FROM ScientistsPapers sp
 
