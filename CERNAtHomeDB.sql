@@ -81,7 +81,7 @@ CREATE TABLE ScientistsPapers(
 ALTER TABLE ScientistsPapers
 ADD CONSTRAINT UniqueScientistPaper UNIQUE (ScientistId, ResearchPaperId);
 
-SELECT COUNT(*) FROM ResearchPapers
+SELECT * FROM ResearchPapers
 
 --insert into Hotels
 insert into Hotels (HotelId, Capacity, City) values (1, 200, 'Geneva');
@@ -192,7 +192,29 @@ insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Prof
 insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (38, 'Sorcha', 'Crookshank', '1999-11-15', 'ŽENSKI', 'programer', 4, 2);
 insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (39, 'Feodora', 'Merrywether', '1933-02-15', 'ŽENSKI', 'programer', 4, 9);
 insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (40, 'Kalinda', 'Drew-Clifton', '1988-10-21', 'ŽENSKI', 'fizičar', 11, 19);
-
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (41, 'Flory', 'Frandsen', '1977-04-12', 'MUŠKI', 'znanstvenik materijala', 2, 1);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (42, 'Wash', 'Hunnybun', '1977-08-14', 'MUŠKI', 'fizičar', 12, 14);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (43, 'Pedro', 'Upex', '1977-09-13', 'MUŠKI', 'fizičar', 14, 16);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (44, 'Pernell', 'Dupoy', '1971-05-13', 'MUŠKI', 'znanstvenik materijala', 15, 4);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (45, 'Osborn', 'Wilkennson', '1974-05-19', 'MUŠKI', 'znanstvenik materijala', 1, 3);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (46, 'Conn', 'Blaisdale', '1974-04-09', 'MUŠKI', 'znanstvenik materijala', 1, 19);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (47, 'Falkner', 'Pfeffer', '1974-04-13', 'MUŠKI', 'znanstvenik materijala', 8, 8);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (48, 'Darin', 'Stewart', '1972-09-04', 'MUŠKI', 'znanstvenik materijala', 5, 6);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (49, 'Gordie', 'Wing', '1971-09-24', 'MUŠKI', 'znanstvenik materijala', 12, 17);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (50, 'Brad', 'O''Halleghane', '1974-06-25', 'MUŠKI', 'znanstvenik materijala', 9, 14);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (51, 'Jacob', 'Addionisio', '1977-09-04', 'MUŠKI', 'fizičar', 10, 3);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (52, 'Hendrik', 'Cullnean', '1973-09-08', 'MUŠKI', 'znanstvenik materijala', 11, 17);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (53, 'Sebastien', 'Giacobazzi', '1976-04-02', 'MUŠKI', 'znanstvenik materijala', 15, 11);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (54, 'Herve', 'McGregor', '1974-02-17', 'MUŠKI', 'znanstvenik materijala', 5, 1);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (55, 'Yuma', 'Janczewski', '1974-10-22', 'MUŠKI', 'znanstvenik materijala', 12, 9);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (56, 'Thadeus', 'Hafner', '1971-09-08', 'MUŠKI', 'znanstvenik materijala', 2, 2);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (57, 'Yvon', 'Nowell', '1977-08-28', 'MUŠKI', 'znanstvenik materijala', 11, 14);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (58, 'Josh', 'Rowat', '1973-08-03', 'MUŠKI', 'znanstvenik materijala', 5, 20);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (59, 'Bennett', 'Corish', '1979-03-25', 'MUŠKI', 'znanstvenik materijala', 15, 12);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (60, 'Luca', 'Matiebe', '1979-10-12', 'MUŠKI', 'znanstvenik materijala', 1, 9);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (61, 'Matt', 'Rowatig', '1973-08-03', 'MUŠKI', 'znanstvenik materijala', 5, 20);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (62, 'Bob', 'Bond', '1979-03-25', 'MUŠKI', 'znanstvenik materijala', 15, 12);
+insert into Scientists (ScientistId, FirstName, LastName, DateOfBirth, Sex, Profession, CountryId, HotelId) values (63, 'Simon', 'Bing', '1979-10-12', 'MUŠKI', 'znanstvenik materijala', 1, 9);
 
 --insert into ResearchPapers
 insert into ResearchPapers (ResearchPaperId, Title, PublishedAt, NumberOfCitations, ProjectId) values (1, 'Managed interactive support', '1950-01-01', 44, 6);

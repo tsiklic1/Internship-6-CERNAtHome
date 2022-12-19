@@ -2,8 +2,11 @@
 
 --1
 SELECT rp.Title, rp.PublishedAt,
+COALESCE(
 (SELECT STRING_AGG(s.LastName || ', ' || LEFT(s.FirstName, 1) || '.', '; ') FROM Scientists s WHERE 
-(SELECT COUNT(*) FROM ScientistsPapers sp WHERE sp.ScientistId = s.ScientistId AND sp.ResearchPaperId = rp.ResearchPaperId)>0)
+(SELECT COUNT(*) FROM ScientistsPapers sp WHERE sp.ScientistId = s.ScientistId AND sp.ResearchPaperId = rp.ResearchPaperId)>0) 
+, 'Ovaj rad nema spremljenog autora u bazi podatka')
+AS Writers
 FROM ResearchPapers rp
 
 --2
@@ -18,14 +21,13 @@ ELSE a.Name END AS AcceleratorName
 FROM Projects p
 LEFT JOIN AcceleratorProjects ap ON p.ProjectId = ap.ProjectId
 LEFT JOIN Accelerators a ON a.AcceleratorId = ap.AcceleratorId
-
 --4
 SELECT * FROM Projects p
 WHERE (SELECT COUNT(*) FROM ResearchPapers rp WHERE p.ProjectId = rp.ProjectId AND 
 	  DATE_PART('year', rp.PublishedAt) >= 2015 AND DATE_PART('year', rp.PublishedAt) <= 2017) > 0
 
---5 u istoj tablici po zemlji broj radova i najpopularniji rad znanstvenika iste zemlje,
---pri čemu je najpopularniji rad onaj koji ima najviše citata
+--5 
+
 --ovo mi da najpopularniji rad po državi
 /*SELECT	DISTINCT ON(c.Name) c.Name, rp.Title FROM Countries c
 LEFT JOIN Scientists s ON c.CountryId = s.CountryId
@@ -41,8 +43,8 @@ LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
 LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
 GROUP BY c.Name*/
 
---ode je samo spojeno to dvoje 
-SELECT t1.Name, t1.Title AS MostPopularResearchPaper, t2.CountOfResearchPapers FROM
+--rješenje
+SELECT t1.Name, COALESCE(t1.Title, 'Nema spremljenih z. radova iz te zemlje') AS MostPopularResearchPaper, t2.CountOfResearchPapers FROM
 (SELECT	DISTINCT ON(c.Name) c.Name, rp.Title FROM Countries c
 LEFT JOIN Scientists s ON c.CountryId = s.CountryId
 LEFT JOIN ScientistsPapers sp ON sp.ScientistId = s.ScientistId
@@ -57,12 +59,11 @@ LEFT JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
 GROUP BY c.Name) t2
 ON t1.Name = t2.Name
 
-
-
 --5 
 
 --6 
-SELECT DISTINCT ON (c.CountryId) c.CountryId, c.Name, rp.Title, rp.PublishedAt FROM ResearchPapers rp
+SELECT DISTINCT ON (c.CountryId) c.CountryId, c.Name, COALESCE(rp.Title, 'Nepoznato') as Title, 
+COALESCE(CAST(rp.PublishedAt AS VARCHAR), 'Nepoznato') AS PublishedAt FROM ResearchPapers rp
 JOIN ScientistsPapers sp ON rp.ResearchPaperId = sp.ResearchPaperId
 JOIN Scientists s ON s.ScientistId = sp.ScientistId
 RIGHT JOIN Countries c ON c.CountryId = s.CountryId
@@ -81,21 +82,13 @@ JOIN Projects p ON p.ProjectId = ap.ProjectId
 JOIN ResearchPapers rp ON rp.ProjectId = p.ProjectId
 GROUP BY a.Name
 
---9 ovo radi samo moran dodat u seed da zapravo ispunjava uvjete (i moran dodat znanstevnike materijala)
+--9
 SELECT s.Profession, DATE_PART('decade', s.DateOfBirth) AS DecadeOfBirth, s.Sex, COUNT(*) AS NumberOfScientists FROM Scientists s
 GROUP BY s.Profession, DATE_PART('decade', s.DateOfBirth), s.Sex
-HAVING COUNT(*) > 20
+HAVING COUNT(*) >= 20
 ORDER BY  DATE_PART('decade', s.DateOfBirth)
 
 --bonus 1
-
---ovo izbroji znanstvenike po svakom radu
---ovo mi da samo imena i prezimena znanstvenika (40 rows)
-/*SELECT s.FirstName, s.Lastname, rp.ResearchPaperId FROM Scientists s
-JOIN ScientistsPapers sp ON s.ScientistId = sp.ScientistId
-JOIN ResearchPapers rp ON rp.ResearchPaperId = sp.ResearchPaperId
-GROUP BY s.ScientistId, rp.ResearchPaperId
-ORDER BY s.Firstname, s.LastName*/
 
 --ovo mi da broj znanstvenika po radu (189 rows)
 /*SELECT rp.Title, COUNT(*) FROM Scientists s
